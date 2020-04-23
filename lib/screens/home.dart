@@ -112,6 +112,31 @@ class _HomeViewState extends State<HomeView> {
     }
   }
 
+  Widget buildBody() {
+    if (widget.items.length > 0) {
+      return GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10.0,
+          mainAxisSpacing: 10.0,
+          childAspectRatio: 1,
+        ),
+        padding: EdgeInsets.all(15.0),
+        itemBuilder: buildTile,
+        itemCount: widget.items.length,
+      );
+    } else {
+      return Center(
+        child: Container(
+          child: Text(
+            'Notes you add appear here.',
+            style: kNothingHereStyle,
+          ),
+        ),
+      );
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -130,17 +155,18 @@ class _HomeViewState extends State<HomeView> {
         centerTitle: true,
       ),
       body: Stack(children: <Widget>[
-        GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 10.0,
-            mainAxisSpacing: 10.0,
-            childAspectRatio: 1,
-          ),
-          padding: EdgeInsets.all(15.0),
-          itemBuilder: buildTile,
-          itemCount: widget.items.length,
-        ),
+        // GridView.builder(
+        //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //     crossAxisCount: 2,
+        //     crossAxisSpacing: 10.0,
+        //     mainAxisSpacing: 10.0,
+        //     childAspectRatio: 1,
+        //   ),
+        //   padding: EdgeInsets.all(15.0),
+        //   itemBuilder: buildTile,
+        //   itemCount: widget.items.length,
+        // ),
+        buildBody(),
         Positioned(
             bottom: 40.0,
             right: 40.0,
